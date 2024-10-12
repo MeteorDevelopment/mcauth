@@ -4,3 +4,4 @@ config:
     motd: Meteor Client - MC Auth
     showMaxPlayers: 1
   builtinCommands: false
+  proxyProtocol: true
