@@ -4,6 +4,7 @@ import (
 	"errors"
 	"go.minekube.com/gate/pkg/util/uuid"
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -13,6 +14,7 @@ type codeData struct {
 }
 
 var codes []codeData
+var mutex sync.Mutex
 
 var ErrInvalidCode = errors.New("invalid code")
 
@@ -21,6 +23,9 @@ func init() {
 }
 
 func New(id uuid.UUID) int {
+	mutex.Lock()
+	defer mutex.Unlock()
+
 	start := rand.Intn(len(codes))
 	i := start
 
@@ -55,6 +60,9 @@ func New(id uuid.UUID) int {
 }
 
 func Retrieve(code int) (uuid.UUID, error) {
+	mutex.Lock()
+	defer mutex.Unlock()
+
 	data := codes[code]
 
 	if data.time.Add(time.Minute * 5).Before(time.Now()) {
