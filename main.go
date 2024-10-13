@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/robinbraemer/event"
 	"go.minekube.com/common/minecraft/color"
 	"go.minekube.com/common/minecraft/component"
 	"go.minekube.com/gate/cmd/gate"
 	"go.minekube.com/gate/pkg/edition/java/proxy"
 	"mcauth/codes"
-	"strconv"
 )
 
 func main() {
@@ -44,7 +44,7 @@ func onLogin(e *proxy.PostLoginEvent) {
 		Content: "Your one time verification code:\n\n",
 		Extra: []component.Component{
 			&component.Text{
-				Content: strconv.Itoa(code),
+				Content: fmt.Sprintf("%06d", code),
 				S: component.Style{
 					Bold:       component.True,
 					Underlined: component.True,
