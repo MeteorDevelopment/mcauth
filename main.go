@@ -26,11 +26,11 @@ func main() {
 	gate.Execute()
 }
 
-func onLogin(e *proxy.PostLoginEvent) {
+func onLogin(e *proxy.LoginEvent) {
 	code := codes.New(e.Player().ID())
 
 	if code == -1 {
-		e.Player().Disconnect(&component.Text{
+		e.Deny(&component.Text{
 			Content: "Failed to generate a verification code, try again later",
 			S: component.Style{
 				Color: color.Red,
@@ -40,7 +40,7 @@ func onLogin(e *proxy.PostLoginEvent) {
 		return
 	}
 
-	e.Player().Disconnect(&component.Text{
+	e.Deny(&component.Text{
 		Content: "Your one time verification code:\n\n",
 		Extra: []component.Component{
 			&component.Text{
