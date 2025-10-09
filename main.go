@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"mcauth/codes"
+
 	"github.com/robinbraemer/event"
 	"go.minekube.com/common/minecraft/color"
 	"go.minekube.com/common/minecraft/component"
 	"go.minekube.com/gate/cmd/gate"
 	"go.minekube.com/gate/pkg/edition/java/proxy"
-	"mcauth/codes"
 )
 
 func main() {
